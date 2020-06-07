@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/login.css') }}">
+    </head>
+    <body class="text-center">
+        <form class="form-signin" action = '/login' method="POST">
+          <img class="mb-4" src="{{ url_for('static',filename='images/login_icon.jpg') }}" alt="" width="72" height="72">
+          <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+            {% if msg!="" %}
+            <p style="color : red;">{{msg}}</p>
+            {% endif %}
+          <label for="inputEmail" class="sr-only">Email address</label>
+          <input type="email" name = "userEmail" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+          <label for="inputPassword" class="sr-only">Password</label>
+          <input type="password" name = "userPassword" id="inputPassword" class="form-control" placeholder="Password" required="">
+          <div class="checkbox mb-3">
+            <label>
+              <input type="checkbox" value="remember-me"> Remember me
+            </label>
+          </div>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+      
+        <script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ url_for('static',filename='vendor/jquery/jquery.min.js') }}"></script>
+    </body>
+</html>
