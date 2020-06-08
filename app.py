@@ -32,8 +32,32 @@ def index():
         return render_template('index.html', user=user, action="Logout")
     return render_template('index.html', user=user, action="")
 
+# 네이버 북 api 요청
+def search_book(query):
+    CLIENT_ID = "UQDh6UhuGYrRhhQvg3eI"
+    CLIENT_SECRET = "UVeMYwBp9v"
+    from urllib.request import Request, urlopen
+    from urllib.parse import urlencode, quote
+    import json
+    request = Request('https://openapi.naver.com/v1/search/book?query=' + quote(query))
+    request.add_header('X-Naver-Client-Id', CLIENT_ID)
+    request.add_header('X-Naver-Client-Secret', CLIENT_SECRET)
+    response = urlopen(request).read().decode('utf-8')
+    search_result = json.loads(response)
+    return search_result
 
-@app.route('/login', methods=['GET', 'POST'])
+#search 페이지 - 임시
+@app.route('/search', methods = ['GET','POST'])
+def search():
+    if request.method == 'POST':
+        search_name = request.form['input']
+    else:
+        search_name = request.args.get('input')
+    book_name = search_name
+    search_result = search_book('%s' % book_name)['items']
+    return render_template('search.html', search_result=search_result)
+
+@app.route('/login', methods = ['GET','POST'])
 def login():
     print("Login action")
     if request.method == 'POST':
@@ -109,3 +133,4 @@ def make_session_permanent():
 
 if __name__ == "__main__":
     app.run(host='localhost', port=5000)
+
