@@ -1,20 +1,36 @@
 import sqlite3
 from flask import Flask, render_template, session, request, redirect, url_for
 from datetime import timedelta
+import time
+import atexit
+from book.bookList import getBookList
+
+# from apscheduler.scheduler import Scheduler
 
 app = Flask(__name__)
 app.secret_key = b'1234qweasdzxc'
 
 DATABASE = './database.db'
 
+
+# # 매일 하루에 한번 bookList DB 업데이트 수정예정
+# cron = Scheduler(daemon=True)
+# cron.start()
+
+
+# @cron.interval_schedule(second=10)
+# def job_function():
+#     getBookList()
+#     print("update complete")
+
+
 @app.route('/')
 def index():
     user = 'Unknown'
     if 'userEmail' in session:
         user = session['userEmail']
-        return render_template('index.html',user = user,action = "Logout")
-    return render_template('index.html',user = user, action = "")
-
+        return render_template('index.html', user=user, action="Logout")
+    return render_template('index.html', user=user, action="")
 
 # 네이버 북 api 요청
 def search_book(query):
@@ -41,8 +57,6 @@ def search():
     search_result = search_book('%s' % book_name)['items']
     return render_template('search.html', search_result=search_result)
 
-
-
 @app.route('/login', methods = ['GET','POST'])
 def login():
     print("Login action")
@@ -53,9 +67,9 @@ def login():
         userPassword = request.form['userPassword']
         conn = sqlite3.connect('database.db')
         cur = conn.cursor()
-        try :
+        try:
             sql = 'select * from members where email = ? and password = ?'
-            cur.execute(sql,(userEmail,userPassword))
+            cur.execute(sql, (userEmail, userPassword))
             res = cur.fetchone()
             print(res)
             if res is None:
@@ -67,10 +81,11 @@ def login():
                 return redirect(url_for('index'))
         except:
             print("No such user")
-            return render_template('login.html',msg = "Please check email or password")        
+            return render_template('login.html', msg="Please check email or password")
     return render_template('login.html')
 
-@app.route('/signup', methods = ['GET','POST'])
+
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
         userEmail = request.form['userEmail']
@@ -80,36 +95,42 @@ def signup():
 
         conn = sqlite3.connect('database.db')
         cur = conn.cursor()
-        
-        try :
+
+        try:
             sql = 'insert into members(email,password,name,phone_number) values (?,?,?,?)'
             print(sql)
-            cur.execute(sql, (userEmail,userPassword,userName, userPhoneNumber))
+            cur.execute(sql, (userEmail, userPassword,
+                              userName, userPhoneNumber))
             conn.commit()
             return redirect(url_for('index'))
-        
+
         except:
             print("User exists")
-            return render_template('signup.html',msg = "User exists! Try another email or Check your info")        
+            return render_template('signup.html', msg="User exists! Try another email or Check your info")
 
 
-@app.route('/login_page', methods = ['GET','POST'])
+@app.route('/login_page', methods=['GET', 'POST'])
 def login_page():
     return render_template('login.html')
+
 
 @app.route('/sign_up_page')
 def sign_up_page():
     return render_template('signup.html')
 
+
 @app.route('/logout')
 def logout():
-    session.pop('userEmail',None)
-    return render_template('index.html',action = "")
+    session.pop('userEmail', None)
+    return render_template('index.html', action="")
+
 
 @app.before_request
 def make_session_permanent():
     session.permanent = True
     app.permanent_session_lifetime = timedelta(minutes=5)
 
+
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',port=5000)
+    app.run(host='localhost', port=5000)
+
