@@ -1,18 +1,11 @@
-{% extends "layout.html" %}
+{% extends "layout.html" %} {% block head %} {% endblock %} {% block body %}
+<h1 class="mt-4 display-4 mb-2">Main</h1>
+<p class="lead mb-5">미완</p>
 
-{% block head %}
-{% endblock %}
+# 검색창 - 임시
+<form action="/search" method="post">
+  <p>검색 : <input type="text" id="input" name="input" /></p>
+  <p><input type="submit" value="검색" onclick="location.href" ="search" /></p>
+</form>
 
-
-
-{% block body %}
-      <h1 class="mt-4 display-4 mb-2">Main</h1>
-      <p class="lead mb-5">미완</p>
-
-      # 검색창 - 임시
-      <form action = "/search" method = "post">
-            <p>검색 : <input type="text" id="input" name="input"></p>
-            <p><input type="submit" value="검색" onclick=location.href="search"></p>
-      </form>
-      
 {% endblock %}

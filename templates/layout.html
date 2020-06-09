@@ -1,73 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
 
-  <title>Online Bookstore</title>
+    <title>Online Bookstore</title>
 
-  <!-- Bootstrap core CSS -->
-  <link href="{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link
+      href="{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css') }}"
+      rel="stylesheet"
+    />
 
-  <!-- Custom styles for this template -->
-  <link href="{{ url_for('static',filename='css/simple-sidebar.css') }}" rel="stylesheet">
-    {%- block head %}
-    {%- endblock head %}
-</head>
-<body>
-  <div class="d-flex" id="wrapper">
-
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-
-      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-        <!--
+    <!-- Custom styles for this template -->
+    <link
+      href="{{ url_for('static',filename='css/simple-sidebar.css') }}"
+      rel="stylesheet"
+    />
+    {%- block head %} {%- endblock head %}
+  </head>
+  <body>
+    <div class="d-flex" id="wrapper">
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+        <nav
+          class="navbar navbar-expand-lg navbar-light bg-light border-bottom"
+        >
+          <!--
         <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
         -->
-        <div><a href="/"><b>Online Book Store</b></a></div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-            <li class="nav-item {{ nav_home }}">
-              <a class="nav-link" href="/">About<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item {{ nav_info }}">
-              {% if action=="" %}
-              <a class="nav-link" href="/sign_up_page">Sign up</a>
-              {% else %}
-              <a class="nav-link" href="/shopping_cart">Shopping Cart</a>
-              {% endif %}
-            </li>
-            <li class="nav-item {{ nav_transfer }}">
-              {% if action=="" %}
-              <a class="nav-link" href="/login_page">Login</a>
-              {% else %}
-              <a class="nav-link" href="/logout">Logout</a>
-              {% endif %}
-            </li>
-          </ul>
+          <div>
+            <a href="/"><b>Online Book Store</b></a>
+          </div>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+              <li class="nav-item {{ nav_home }}">
+                <a class="nav-link" href="/"
+                  >About<span class="sr-only">(current)</span></a
+                >
+              </li>
+              <li class="nav-item {{ nav_info }}">
+                {% if action=="" %}
+                <a class="nav-link" href="/sign_up_page">Sign up</a>
+                {% else %}
+                <a class="nav-link" href="/shopping_cart">Shopping Cart</a>
+                {% endif %}
+              </li>
+              <li class="nav-item {{ nav_transfer }}">
+                {% if action=="" %}
+                <a class="nav-link" href="/login_page">Login</a>
+                {% else %}
+                <a class="nav-link" href="/logout">Logout</a>
+                {% endif %}
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <div class="container-fluid" style="text-align: center;">
+          {% block body %} {% endblock %}
+          <a class="nav-link" href="/bestseller">Test Bestseller Page</a>
         </div>
-      </nav>
-
-      <div class="container-fluid" style="text-align: center;">
-        {% block body %}
-		{% endblock %}
       </div>
-
+      <!-- /#page-content-wrapper -->
     </div>
-    <!-- /#page-content-wrapper -->
+    <!-- /#wrapper -->
 
-  </div>
-  <!-- /#wrapper -->
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="{{ url_for('static',filename='vendor/jquery/jquery.min.js') }}"></script>
-  <script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-</body>
-
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{ url_for('static',filename='vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  </body>
 </html>

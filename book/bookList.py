@@ -11,6 +11,7 @@ summary = ""
 publisher = ""
 pubDate = ""
 imageUrl = ""
+price = ""
 
 
 def getBookList():
@@ -23,7 +24,7 @@ def getBookList():
 
     data = json.loads(response)
     books = data['item']
-
+    print('--------InsertDB---------')
     for book in books:
         # print('title: {}'.format(book['title']))
         # print('author: {}'.format(book['author']))
@@ -31,36 +32,42 @@ def getBookList():
         # print('publisher: {}'.format(book['publisher']))
         # print('pubdate: {}'.format(book['pubDate']))
         # print('imgUrl: {}'.format(book['coverLargeUrl']))
-        print('--------UpdateDB---------')
+
         title = book['title']
         author = book['author']
         summary = book['description']
         publisher = book['publisher']
         pubDate = book['pubDate']
         imageUrl = book['coverLargeUrl']
-        sql = 'insert into bookLists(title,author,summary,publisher,pubDate,imageUrl) values (?,?,?,?,?,?)'
+        price = book['priceStandard']
+        sql = 'insert into bookLists(title,author,summary,publisher,pubDate,imageUrl,price) values (?,?,?,?,?,?,?)'
         cur.execute(sql, (title, author, summary,
-                          publisher, pubDate, imageUrl))
+                          publisher, pubDate, imageUrl, price))
         conn.commit()
-        print("Book List Update Complete")
+        conn.close()
+    print("Book List Insert Complete")
 
 
 def insertDB():
     getBookList()
+
     # sql = 'insert into bookLists(title,author,summary,publisher,pubDate,imageUrl) values (?,?,?,?,?,?)'
     # cur.execute(sql, (title, author, summary, publisher, pubDate, imageUrl))
     # conn.commit()
     # print("Book List Update Complete")
 
-#중복 삽입 방지
+# 중복 삽입 방지
+
+
 def updateDB():
     print("UpdateDB....")
+    conn.close()
 
 
 cur.execute(
     "SELECT count(*) from bookLists")
-count= cur.fetchone()
-if(count[0]>0):
+count = cur.fetchone()
+if(count[0] > 0):
     updateDB()
 else:
     insertDB()

@@ -1,0 +1,123 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div class="jumbotron">
+        <h1>BestSeller</h1>
+        <p class="lead">BestSeller.</p>
+    </div>
+
+<div class="row">
+        {% for infos in search_result %}
+            <div class="col-md-4">
+                <h4 id="title"> {{infos['title'].replace("</b>","").replace("<b>","")}}</h4>
+                <p>{{infos['price']}}</p>
+                <p>{{infos['author']}}</p>
+                <p> <img src="{{infos['image']}}" /> </p>
+             </div>
+        {% endfor %}
+    </div>
+    
+    <div class="listItem singleType">
+        <div class="cover">
+            <div class="coverImage">
+                <label>
+                <a href="/product/BookDisplay.do?_method=detail&amp;sc.shopNo=0000400000&amp;sc.prdNo=332991373&amp;sc.saNo=003003001&amp;bid1=Best_zone&amp;bid2=LiveRanking&amp;bid3=PRD&amp;bid4=001" target="_blank">
+                    <span class="checkBox">
+                        <input type="checkbox" name="_KEY" value="332991373">
+                    </span>
+                    <img src="http://bimage.interpark.com/goods_image/1/3/7/3/332991373s.jpg" alt="애쓰지 않고 편안하게">
+                    <i class="decoFront"></i>
+                </a>
+                </label>
+            </div>
+            <div class="coverOption">
+                <ul>
+                    <li class="cart">
+                        
+                        <a href="#" value="332991373" class="cartGo"><span>CART</span></a>
+                    </li>
+                    <li class="buy">
+                        <a href="javascript:directOrd('332991373');"><span>BUY</span></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="rankNumber digit2">
+                <span class="rankBtn_ctrl rkNum_B01 "></span>
+            </div>
+        </div>
+        <div class="itemIcon">
+        
+                        <span class="bestSeller">베스트셀러</span>
+                    
+                        <span class="interparkRecommend">인터파크추천</span>                                                      
+                    
+        
+                        <span class="gift">사은품</span>
+                    
+        </div>
+        <a href="/product/BookDisplay.do?_method=detail&amp;sc.shopNo=0000400000&amp;sc.prdNo=332991373&amp;sc.saNo=003003001&amp;bid1=Best_zone&amp;bid2=LiveRanking&amp;bid3=PRD&amp;bid4=001" target="_blank">
+            <div class="itemName"><strong>애쓰지 않고 편안하게 </strong></div>
+            <div class="itemMeta">
+                <span class="author">김수현/김수현 그림</span>
+                <span class="company">놀(다산북스)</span>
+            </div>
+            
+            
+                        <div class="priceWrap">
+                            <span class="price">
+                                <em>13,500</em>
+                                <span class="currency">원</span>
+                            </span>
+                            
+                            <span class="benefits"> 
+                                <span>(</span>
+                                
+                                <span class="discount">
+                                    <em>10%</em>
+                                    <span class="unit">할인</span>
+                                </span>
+                                
+                                <span class="save">
+                                    <em>5%</em>
+                                    <span class="unit">적립</span>
+                                </span>
+                                
+                                <span>)</span>
+                            </span>
+                            
+                        </div>
+                        
+            
+        </a>
+        
+                        <div class="reviewStat">
+                           <span class="title">평점</span>
+                           <span class="starRateWrap">
+                               <span class="starRate" style="width:97%">9.7</span>
+                           </span>
+                           <em class="rateNumber">9.7</em>
+                        </div>  
+                        
+            <div class="saleIndex">
+                <span class="title">판매지수</span>
+                <em class="indexNumber">141,253</em>
+            </div>
+            <div class="relatedEvent">
+                <ul>
+            
+            
+                <li>
+                    <a href="http://book.interpark.com/event/EventFntTemPlate.do?_method=GenTemplate&amp;sc.evtNo=234621" target="_blank">「애쓰지 않고 편안하게」 출간 기...</a>
+                </li>
+                        
+                <li>
+                    <a href="http://book.interpark.com/book/genbookeventaction.do?_method=EventPlan&amp;sc.evtNo=234379" target="_blank">[인생책] 나의 인생책 3rd '...</a>
+                </li>
+                        
+                <li>
+                    <a href="http://book.interpark.com/event/EventFntTemPlate.do?_method=GenTemplate&amp;sc.evtNo=234410" target="_blank">「애쓰지 않고 편안하게」 출간 기...</a>
+                </li>
+                        
+                </ul>
+            </div>
+    </div>
+{% endblock %}
